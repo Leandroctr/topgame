@@ -7,7 +7,6 @@
 
 <style>
 
-/* RESET */
 * {margin:0;padding:0;box-sizing:border-box;}
 
 body {
@@ -17,43 +16,14 @@ body {
               radial-gradient(circle at 80% 30%, rgba(0,200,255,0.15), transparent 40%),
               radial-gradient(circle at 50% 80%, rgba(255,200,0,0.15), transparent 40%),
               #000;
-  overflow-x: hidden;
-}
-
-/* FUNDO ANIMADO */
-.neon-bg::before {
-  content:"";
-  position:fixed;
-  width:200%;
-  height:200%;
-  top:-50%;
-  left:-50%;
-  background: linear-gradient(45deg,
-    transparent,
-    rgba(255,0,100,0.1),
-    transparent,
-    rgba(0,255,200,0.1),
-    transparent,
-    rgba(255,200,0,0.1)
-  );
-  animation: rotate 15s linear infinite;
-  z-index:-1;
-}
-
-@keyframes rotate {
-  0% {transform:rotate(0deg);}
-  100% {transform:rotate(360deg);}
 }
 
 /* HEADER */
 header {
   display:flex;
-  justify-content:space-between;
-  align-items:center;
+  justify-content:flex-end;
   padding:20px;
 }
-
-header img {height:55px;}
 
 .btn {
   background: linear-gradient(45deg,#00ff88,#00c3ff);
@@ -64,22 +34,33 @@ header img {height:55px;}
   font-weight:bold;
 }
 
-/* HERO */
+/* HERO LOGO */
 .hero {
-  padding:60px 20px;
+  height: 70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
   text-align:center;
 }
 
-.hero h1 {
-  font-size:34px;
-  background: linear-gradient(45deg,#00ff88,#00c3ff,#ff00aa);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+.hero img {
+  width: 90%;
+  max-width: 800px;
+  animation: float 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 25px rgba(0,255,136,0.6));
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
 }
 
 .hero p {
-  margin:15px 0;
-  opacity:0.9;
+  margin-top: 20px;
+  font-size: 18px;
+  opacity: 0.8;
 }
 
 /* JACKPOT */
@@ -88,19 +69,12 @@ header img {height:55px;}
   color:#00ff88;
   text-shadow:0 0 20px #00ff88;
   margin-top:20px;
-  animation:pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%{transform:scale(1);}
-  50%{transform:scale(1.05);}
-  100%{transform:scale(1);}
 }
 
 /* VIDEO */
 .video {
   text-align:center;
-  padding:30px;
+  padding:40px 20px;
 }
 
 .video video {
@@ -149,35 +123,18 @@ header img {height:55px;}
   max-height:90%;
 }
 
-/* FOOTER COM OVERLAY */
-.footer {
-  position:relative;
-  height:300px;
-  background:url("images/frente.jpeg") center/cover no-repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.footer::after {
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.75);
-}
-
-.footer-content {
-  position:relative;
-  z-index:2;
+/* CTA FINAL */
+.cta {
   text-align:center;
+  padding:60px 20px;
 }
 
-.footer-content h2 {
+.cta h2 {
   color:#00ff88;
 }
 
-.footer-bottom {
+/* FOOTER LIMPO */
+.footer {
   text-align:center;
   padding:20px;
   opacity:0.5;
@@ -192,36 +149,30 @@ header img {height:55px;}
   color:#000;
   padding:15px;
   border-radius:50%;
-  font-size:20px;
   text-decoration:none;
 }
 
 /* MOBILE */
 @media(max-width:768px){
-  .hero h1 {font-size:26px;}
+  .hero img {
+    max-width: 90%;
+  }
 }
 
 </style>
 </head>
 
-<body class="neon-bg">
+<body>
 
 <header>
-  <img src="images/Logo.jpeg">
   <a class="btn" href="https://wa.me/55SEUNUMERO">WhatsApp</a>
 </header>
 
 <section class="hero">
-  <h1>Mais retenção. Mais tempo de jogo. Mais faturamento.</h1>
-  <p>Jogos com jackpots progressivos que mantêm o jogador ativo.</p>
+  <img src="images/Logo.jpeg">
+  <p>Máquinas com jackpots progressivos que aumentam o tempo de jogo</p>
 
   <div class="jackpot" id="jackpot">R$ 1.200</div>
-
-  <br>
-
-  <a class="btn" href="https://wa.me/55SEUNUMERO">
-    Solicitar demonstração
-  </a>
 </section>
 
 <section class="video">
@@ -240,18 +191,16 @@ header img {height:55px;}
   <img id="lightbox-img">
 </div>
 
-<div class="footer">
-  <div class="footer-content">
-    <h2>Veja na prática</h2>
-    <p>Fale agora e solicite uma demonstração</p>
-    <br>
-    <a class="btn" href="https://wa.me/55SEUNUMERO">
-      Falar no WhatsApp
-    </a>
-  </div>
-</div>
+<section class="cta">
+  <h2>Veja na prática</h2>
+  <p>Solicite uma demonstração agora</p>
+  <br>
+  <a class="btn" href="https://wa.me/55SEUNUMERO">
+    Falar no WhatsApp
+  </a>
+</section>
 
-<div class="footer-bottom">
+<div class="footer">
   Top Game © 2026
 </div>
 
@@ -259,10 +208,10 @@ header img {height:55px;}
 
 <script>
 
-/* JACKPOT ANIMADO */
+/* JACKPOT */
 let value = 1200;
 setInterval(()=>{
-  value += Math.floor(Math.random()*8);
+  value += Math.floor(Math.random()*6);
   document.getElementById("jackpot").innerText = "R$ " + value;
 },150);
 
