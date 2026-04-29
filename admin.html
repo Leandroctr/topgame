@@ -1,1 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Game — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080c14;--bg2:#0d1320;--bg3:#111827;--bg4:#1a2235;--gold:#f0b429;--red:#e63946;--green:#22c55e;--white:#f0f4f8;--gray:#6b7a99;--border:rgba(240,180,41,0.15);--font-d:'Bebas Neue',sans-serif;--font-b:'Outfit',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg2);color:var(--white);font-family:var(--font-b);min-height:100vh;}
 
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;align-items:center;justify-content:center;}
+#login-screen.hidden{display:none;}
+.login-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:3rem;width:100%;max-width:400px;text-align:center;}
+.login-logo{font-family:var(--font-d);font-size:2rem;letter-spacing:4px;color:var(--gold);margin-bottom:0.25rem;}
+.login-sub{font-size:0.8rem;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-bottom:2.5rem;}
+.login-box h2{font-family:var(--font-d);font-size:1.5rem;letter-spacing:2px;margin-bottom:2rem;}
+.fg{margin-bottom:1.1rem;text-align:left;}
+.fg label{display:block;font-size:0.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:0.4rem;}
+.fg input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:0.8rem 1rem;color:var(--white);font-family:var(--font-b);font-size:0.9rem;transition:border-color 0.3s;}
+.fg input:focus{outline:none;border-color:var(--gold);}
+.btn-gold{background:var(--gold);color:var(--bg);padding:0.85rem 2rem;border-radius:6px;font-weight:700;font-size:0.9rem;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;font-family:var(--font-b);transition:all 0.3s;width:100%;}
+.btn-gold:hover{background:#ffd166;}
+.btn-gold:disabled{opacity:0.5;cursor:not-allowed;}
+.login-err{color:var(--red);font-size:0.85rem;margin-top:1rem;min-height:1.2rem;}
+
+/* LAYOUT */
+#app{display:flex;min-height:100vh;}
+#app.hidden{display:none;}
+.sidebar{width:240px;background:var(--bg);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:10;}
+.sidebar-logo{padding:1.5rem;border-bottom:1px solid var(--border);}
+.sidebar-logo span{font-family:var(--font-d);font-size:1.4rem;letter-spacing:3px;color:var(--gold);}
+.sidebar-logo small{display:block;font-size:0.65rem;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-top:0.2rem;}
+.sidebar-nav{flex:1;padding:1.5rem 0;overflow-y:auto;}
+.nav-item{display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1.5rem;color:var(--gray);cursor:pointer;transition:all 0.3s;font-size:0.88rem;font-weight:500;border-left:3px solid transparent;}
+.nav-item:hover{color:var(--white);background:rgba(255,255,255,0.03);}
+.nav-item.active{color:var(--gold);background:rgba(240,180,41,0.06);border-left-color:var(--gold);}
+.nav-icon{font-size:1rem;width:20px;text-align:center;}
+.sidebar-footer{padding:1.5rem;border-top:1px solid var(--border);}
+.logout-btn{width:100%;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.2);color:var(--red);padding:0.65rem;border-radius:6px;font-family:var(--font-b);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.3s;}
+.logout-btn:hover{background:var(--red);color:var(--white);}
+.main{margin-left:240px;flex:1;padding:2rem;}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem;}
+.topbar h1{font-family:var(--font-d);font-size:1.8rem;letter-spacing:2px;}
+.page{display:none;}
+.page.active{display:block;}
+
+/* CARDS STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.25rem;}
+.stat-card-val{font-family:var(--font-d);font-size:2rem;color:var(--gold);}
+.stat-card-label{font-size:0.75rem;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-top:0.25rem;}
+
+/* TABLE */
+.table-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.table-header{padding:1.25rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);}
+.table-header h3{font-size:1rem;font-weight:700;}
+table{width:100%;border-collapse:collapse;}
+th{background:rgba(255,255,255,0.02);padding:0.75rem 1.25rem;text-align:left;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray);font-weight:600;}
+td{padding:0.85rem 1.25rem;font-size:0.88rem;border-top:1px solid rgba(255,255,255,0.04);}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.td-img{width:50px;height:35px;object-fit:cover;border-radius:4px;background:var(--bg4);}
+.cat-pill{display:inline-block;padding:0.2rem 0.6rem;border-radius:3px;font-size:0.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(240,180,41,0.15);color:var(--gold);}
+.action-btn{background:none;border:1px solid rgba(255,255,255,0.1);color:var(--gray);padding:0.3rem 0.75rem;border-radius:4px;cursor:pointer;font-size:0.78rem;font-family:var(--font-b);transition:all 0.3s;}
+.action-btn:hover{border-color:var(--gold);color:var(--gold);}
+.action-btn.del:hover{border-color:var(--red);color:var(--red);}
+.empty-row td{text-align:center;color:var(--gray);padding:3rem;}
+
+/* FORM PRODUTO */
+.form-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:2rem;margin-bottom:2rem;}
+.form-card h3{font-size:1rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.fg-full{grid-column:1/-1;}
+.fg{margin-bottom:1rem;}
+.fg label{display:block;font-size:0.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:0.4rem;}
+.fg input,.fg select,.fg textarea{width:100%;background:var(--bg4);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:0.7rem 0.9rem;color:var(--white);font-family:var(--font-b);font-size:0.9rem;transition:border-color 0.3s;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--gold);}
+.fg textarea{resize:vertical;min-height:90px;}
+.fg select option{background:var(--bg3);}
+.fg input[type=range]{padding:0;background:none;border:none;}
+.fg input[type=checkbox]{width:auto;margin-right:0.5rem;}
+
+/* UPLOAD */
+.upload-zone{border:2px dashed rgba(255,255,255,0.1);border-radius:8px;padding:2rem;text-align:center;cursor:pointer;transition:all 0.3s;background:var(--bg4);position:relative;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--gold);background:rgba(240,180,41,0.04);}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;}
+.upload-icon{font-size:2rem;margin-bottom:0.5rem;}
+.upload-text{font-size:0.85rem;color:var(--gray);}
+.upload-text strong{color:var(--gold);}
+.upload-preview{margin-top:1rem;}
+.upload-preview img,.upload-preview video{max-width:100%;max-height:200px;border-radius:6px;border:1px solid var(--border);}
+.progress-bar{height:4px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;margin-top:0.75rem;}
+.progress-fill{height:100%;background:var(--gold);transition:width 0.3s;width:0%;}
+
+/* MENSAGENS */
+.msg-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem;}
+.msg-header{display:flex;justify-content:space-between;margin-bottom:0.5rem;}
+.msg-nome{font-weight:700;font-size:0.95rem;}
+.msg-data{font-size:0.75rem;color:var(--gray);}
+.msg-meta{font-size:0.8rem;color:var(--gray);margin-bottom:0.75rem;}
+.msg-body{font-size:0.9rem;color:var(--white);padding:0.75rem;background:rgba(255,255,255,0.03);border-radius:6px;border-left:3px solid var(--gold);}
+
+/* TOAST */
+.toasts{position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;flex-direction:column;gap:0.75rem;}
+.toast{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:0.9rem 1.4rem;font-size:0.88rem;animation:slideIn 0.3s;max-width:280px;}
+@keyframes slideIn{from{transform:translateX(300px);}to{transform:translateX(0);}}
+.toast.s{border-left:3px solid var(--green);}
+.toast.e{border-left:3px solid var(--red);}
+
+/* SECTION DIVIDER */
+.section-divider{display:flex;align-items:center;gap:1rem;margin:2rem 0 1.5rem;}
+.section-divider span{font-size:0.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
+.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+
+@media(max-width:768px){
+  .sidebar{width:100%;height:auto;position:relative;bottom:auto;flex-direction:row;flex-wrap:wrap;}
+  .main{margin-left:0;}
+  .form-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">TOP GAME</div>
+    <div class="login-sub">Painel Administrativo</div>
+    <h2>ACESSO RESTRITO</h2>
+    <div class="fg"><label>Email</label><input type="email" id="l-email" placeholder="admin@topgame.com.br" onkeydown="if(event.key==='Enter')fazerLogin()"></div>
+    <div class="fg"><label>Senha</label><input type="password" id="l-senha" placeholder="••••••••" onkeydown="if(event.key==='Enter')fazerLogin()"></div>
+    <button class="btn-gold" onclick="fazerLogin()" id="btn-login">Entrar</button>
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+  <div class="sidebar">
+    <div class="sidebar-logo"><span>TOP GAME</span><small>Admin Panel</small></div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="navTo('dashboard')"><span class="nav-icon">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="navTo('produtos')"><span class="nav-icon">🎮</span> Produtos</div>
+      <div class="nav-item" onclick="navTo('novo')"><span class="nav-icon">➕</span> Novo Produto</div>
+      <div class="nav-item" onclick="navTo('empresa')"><span class="nav-icon">🏢</span> Empresa</div>
+      <div class="nav-item" onclick="navTo('mensagens')"><span class="nav-icon">✉️</span> Mensagens</div>
+    </nav>
+    <div class="sidebar-footer">
+      <div style="font-size:0.75rem;color:var(--gray);margin-bottom:0.75rem;" id="user-email"></div>
+      <button class="logout-btn" onclick="fazerLogout()">Sair da Conta</button>
+    </div>
+  </div>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <div class="topbar"><h1>DASHBOARD</h1></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-card-val" id="d-total">0</div><div class="stat-card-label">Total de Jogos</div></div>
+        <div class="stat-card"><div class="stat-card-val" id="d-slots">0</div><div class="stat-card-label">Slots</div></div>
+        <div class="stat-card"><div class="stat-card-val" id="d-cassino">0</div><div class="stat-card-label">Cassino</div></div>
+        <div class="stat-card"><div class="stat-card-val" id="d-msgs">0</div><div class="stat-card-label">Mensagens</div></div>
+      </div>
+      <div class="table-card">
+        <div class="table-header"><h3>Últimos Produtos</h3><button class="btn-gold" style="width:auto;padding:0.5rem 1rem;font-size:0.8rem;" onclick="navTo('novo')">+ Novo</button></div>
+        <table><thead><tr><th>Jogo</th><th>Categoria</th><th>RTP</th><th>Jackpot</th></tr></thead>
+        <tbody id="dash-table"><tr class="empty-row"><td colspan="4">Carregando...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- LISTA PRODUTOS -->
+    <div class="page" id="page-produtos">
+      <div class="topbar"><h1>PRODUTOS</h1><button class="btn-gold" style="width:auto;padding:0.6rem 1.25rem;font-size:0.82rem;" onclick="navTo('novo')">+ Novo Produto</button></div>
+      <div class="table-card">
+        <table><thead><tr><th>Imagem</th><th>Nome</th><th>Categoria</th><th>RTP</th><th>Jackpot</th><th>Ações</th></tr></thead>
+        <tbody id="prod-table"><tr class="empty-row"><td colspan="6">Carregando...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <!-- NOVO / EDITAR PRODUTO -->
+    <div class="page" id="page-novo">
+      <div class="topbar"><h1 id="form-title">NOVO PRODUTO</h1></div>
+      <input type="hidden" id="edit-id">
+
+      <div class="form-card">
+        <h3>Informações Básicas</h3>
+        <div class="form-grid">
+          <div class="fg"><label>Nome do Jogo *</label><input type="text" id="p-nome" placeholder="Ex: Gates of Olympus"></div>
+          <div class="fg"><label>Categoria *</label>
+            <select id="p-cat">
+              <option value="slots">Slots</option>
+              <option value="slots2telas">Slots 2 Telas</option>
+              <option value="cassino">Cassino ao Vivo</option>
+              <option value="bingo">Bingo</option>
+              <option value="jackpots">Jackpots</option>
+            </select>
+          </div>
+          <div class="fg fg-full"><label>Descrição</label><textarea id="p-desc" placeholder="Descreva o jogo..."></textarea></div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Informações Técnicas</h3>
+        <div class="form-grid">
+          <div class="fg">
+            <label>RTP (%) <span style="color:var(--gold)" id="rtp-val">96</span>%</label>
+            <input type="range" id="p-rtp" min="90" max="99" step="0.1" value="96" oninput="document.getElementById('rtp-val').textContent=this.value">
+          </div>
+          <div class="fg"><label>Volatilidade</label>
+            <select id="p-vol">
+              <option value="">— Selecione —</option>
+              <option value="Baixa">Baixa</option>
+              <option value="Média">Média</option>
+              <option value="Alta">Alta</option>
+              <option value="Muito Alta">Muito Alta</option>
+            </select>
+          </div>
+          <div class="fg"><label>Linhas de Pagamento</label><input type="text" id="p-linhas" placeholder="Ex: 20, Megaways, Cluster"></div>
+          <div class="fg"><label>Número de Rolos</label><input type="text" id="p-rolos" placeholder="Ex: 5, 6x4"></div>
+          <div class="fg"><label>Max Win (x)</label><input type="number" id="p-maxwin" placeholder="Ex: 5000"></div>
+          <div class="fg"><label>Plataformas</label>
+            <select id="p-plat">
+              <option value="Mobile + Desktop">Mobile + Desktop</option>
+              <option value="Desktop">Desktop</option>
+              <option value="Mobile">Mobile</option>
+            </select>
+          </div>
+          <div class="fg" style="display:flex;align-items:center;gap:0.75rem;padding-top:1.5rem;">
+            <input type="checkbox" id="p-jackpot" style="width:18px;height:18px;accent-color:var(--gold);">
+            <label for="p-jackpot" style="font-size:0.9rem;font-weight:600;text-transform:none;letter-spacing:0;color:var(--white);cursor:pointer;">Possui Jackpot</label>
+          </div>
+          <div class="fg" id="jackpot-tipo-group" style="display:none;"><label>Tipo de Jackpot</label>
+            <select id="p-jackpot-tipo">
+              <option value="Progressivo">Progressivo</option>
+              <option value="Mini/Minor/Major/Grand">Mini/Minor/Major/Grand</option>
+              <option value="Local">Local</option>
+              <option value="Fixo">Fixo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3>Imagem de Capa</h3>
+        <div class="upload-zone" id="upload-img-zone">
+          <input type="file" id="upload-img" accept="image/*" onchange="previewFile('img')">
+          <div class="upload-icon">🖼️</div>
+          <div class="upload-text"><strong>Clique para enviar</strong> ou arraste aqui<br><small>JPG, PNG, WEBP — Máx 5MB</small></div>
+        </div>
+        <div class="upload-preview" id="prev-img"></div>
+        <div class="progress-bar"><div class="progress-fill" id="prog-img"></div></div>
+        <input type="hidden" id="p-img-url">
+      </div>
+
+      <div class="form-card">
+        <h3>Vídeo de Demonstração <span style="font-size:0.75rem;color:var(--gray);font-weight:400;">(opcional)</span></h3>
+        <div class="upload-zone" id="upload-vid-zone">
+          <input type="file" id="upload-vid" accept="video/*" onchange="previewFile('vid')">
+          <div class="upload-icon">🎬</div>
+          <div class="upload-text"><strong>Clique para enviar</strong> ou arraste aqui<br><small>MP4, WEBM — Máx 50MB</small></div>
+        </div>
+        <div class="upload-preview" id="prev-vid"></div>
+        <div class="progress-bar"><div class="progress-fill" id="prog-vid"></div></div>
+        <input type="hidden" id="p-vid-url">
+      </div>
+
+      <div style="display:flex;gap:1rem;justify-content:flex-end;margin-bottom:3rem;">
+        <button class="action-btn" onclick="cancelarEdicao()">Cancelar</button>
+        <button class="btn-gold" style="width:auto;padding:0.85rem 2rem;" onclick="salvarProduto()" id="btn-salvar">Salvar Produto</button>
+      </div>
+    </div>
+
+    <!-- EMPRESA -->
+    <div class="page" id="page-empresa">
+      <div class="topbar"><h1>EMPRESA</h1></div>
+      <div class="form-card">
+        <h3>Informações da Empresa</h3>
+        <div class="form-grid">
+          <div class="fg"><label>Nome da Empresa</label><input type="text" id="e-nome" placeholder="Top Game"></div>
+          <div class="fg"><label>Email</label><input type="email" id="e-email" placeholder="contato@topgame.com.br"></div>
+          <div class="fg"><label>Telefone / WhatsApp</label><input type="tel" id="e-tel" placeholder="+55 (11) 9999-9999"></div>
+          <div class="fg"><label>Endereço</label><input type="text" id="e-end" placeholder="São Paulo, SP"></div>
+          <div class="fg fg-full"><label>Descrição da Empresa</label><textarea id="e-desc" placeholder="Descreva a empresa..."></textarea></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <h3>Foto da Empresa <span style="font-size:0.75rem;color:var(--gray);font-weight:400;">(seção "Sobre")</span></h3>
+        <div class="upload-zone">
+          <input type="file" id="upload-emp" accept="image/*" onchange="previewEmp()">
+          <div class="upload-icon">🏢</div>
+          <div class="upload-text"><strong>Clique para enviar</strong> foto da empresa</div>
+        </div>
+        <div class="upload-preview" id="prev-emp"></div>
+        <div class="progress-bar"><div class="progress-fill" id="prog-emp"></div></div>
+        <input type="hidden" id="e-img-url">
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:3rem;">
+        <button class="btn-gold" style="width:auto;padding:0.85rem 2rem;" onclick="salvarEmpresa()">Salvar Alterações</button>
+      </div>
+    </div>
+
+    <!-- MENSAGENS -->
+    <div class="page" id="page-mensagens">
+      <div class="topbar"><h1>MENSAGENS</h1></div>
+      <div id="msgs-container"><div style="color:var(--gray);text-align:center;padding:3rem;">Carregando...</div></div>
+    </div>
+  </main>
+</div>
+
+<div class="toasts" id="toasts"></div>
+
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js"></script>
+
+<script>
+const firebaseConfig={apiKey:"AIzaSyBZ6U2o_-JIF0lpPJ6Cc1VqkSU4DLuU8J0",authDomain:"topgame-site.firebaseapp.com",projectId:"topgame-site",storageBucket:"topgame-site.firebasestorage.app",messagingSenderId:"55247206603",appId:"1:55247206603:web:a7a66e393e6cd8569f834e"};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+const auth=firebase.auth();
+const storage=firebase.storage();
+
+// TOAST
+function toast(msg,tipo='s'){const t=document.createElement('div');t.className=`toast ${tipo}`;t.textContent=msg;document.getElementById('toasts').appendChild(t);setTimeout(()=>t.remove(),4000);}
+
+// AUTH
+auth.onAuthStateChanged(user=>{
+  if(user){
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    document.getElementById('user-email').textContent=user.email;
+    carregarDashboard();carregarEmpresaForm();
+  } else {
+    document.getElementById('login-screen').classList.remove('hidden');
+    document.getElementById('app').classList.add('hidden');
+  }
+});
+
+async function fazerLogin(){
+  const email=document.getElementById('l-email').value.trim();
+  const senha=document.getElementById('l-senha').value;
+  const err=document.getElementById('login-err');
+  const btn=document.getElementById('btn-login');
+  if(!email||!senha){err.textContent='Preencha email e senha.';return;}
+  btn.disabled=true;btn.textContent='Entrando...';err.textContent='';
+  try{await auth.signInWithEmailAndPassword(email,senha);}
+  catch(e){err.textContent='Email ou senha inválidos.';btn.disabled=false;btn.textContent='Entrar';}
+}
+
+function fazerLogout(){auth.signOut();}
+
+// NAVEGAÇÃO
+function navTo(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelector(`[onclick="navTo('${page}')"]`).classList.add('active');
+  if(page==='produtos')carregarProdutos();
+  if(page==='mensagens')carregarMensagens();
+  if(page==='novo'){limparForm();}
+}
+
+// JACKPOT TOGGLE
+document.getElementById('p-jackpot').addEventListener('change',function(){
+  document.getElementById('jackpot-tipo-group').style.display=this.checked?'block':'none';
+});
+
+// UPLOAD
+const uploads={img:{file:null,url:''},vid:{file:null,url:''}};
+
+function previewFile(tipo){
+  const input=document.getElementById(`upload-${tipo==='img'?'img':'vid'}`);
+  const file=input.files[0];if(!file)return;
+  uploads[tipo].file=file;
+  const prev=document.getElementById(`prev-${tipo}`);
+  if(tipo==='img')prev.innerHTML=`<img src="${URL.createObjectURL(file)}" style="max-width:100%;max-height:180px;border-radius:6px;border:1px solid var(--border);">`;
+  else prev.innerHTML=`<video src="${URL.createObjectURL(file)}" controls style="max-width:100%;max-height:180px;border-radius:6px;"></video>`;
+}
+
+function previewEmp(){
+  const f=document.getElementById('upload-emp').files[0];if(!f)return;
+  document.getElementById('prev-emp').innerHTML=`<img src="${URL.createObjectURL(f)}" style="max-width:100%;max-height:180px;border-radius:6px;border:1px solid var(--border);">`;
+}
+
+async function uploadFile(file,path,progressId){
+  return new Promise((res,rej)=>{
+    const ref=storage.ref(path);
+    const task=ref.put(file);
+    task.on('state_changed',snap=>{
+      const pct=Math.round(snap.bytesTransferred/snap.totalBytes*100);
+      document.getElementById(progressId).style.width=pct+'%';
+    },rej,async()=>{res(await task.snapshot.ref.getDownloadURL());});
+  });
+}
+
+// SALVAR PRODUTO
+async function salvarProduto(){
+  const nome=document.getElementById('p-nome').value.trim();
+  if(!nome){toast('Nome do jogo é obrigatório.','e');return;}
+  const btn=document.getElementById('btn-salvar');
+  btn.disabled=true;btn.textContent='Salvando...';
+  try{
+    const editId=document.getElementById('edit-id').value;
+    const dados={
+      nome,
+      categoria:document.getElementById('p-cat').value,
+      descricao:document.getElementById('p-desc').value,
+      rtp:parseFloat(document.getElementById('p-rtp').value)||null,
+      volatilidade:document.getElementById('p-vol').value,
+      linhas:document.getElementById('p-linhas').value,
+      rolos:document.getElementById('p-rolos').value,
+      maxWin:document.getElementById('p-maxwin').value||null,
+      plataformas:document.getElementById('p-plat').value,
+      jackpot:document.getElementById('p-jackpot').checked,
+      jackpotTipo:document.getElementById('p-jackpot').checked?document.getElementById('p-jackpot-tipo').value:'',
+      atualizado:new Date()
+    };
+    // Upload imagem
+    if(uploads.img.file){
+      toast('Enviando imagem...','s');
+      dados.imagemUrl=await uploadFile(uploads.img.file,`produtos/${Date.now()}_${uploads.img.file.name}`,'prog-img');
+    } else if(document.getElementById('p-img-url').value){
+      dados.imagemUrl=document.getElementById('p-img-url').value;
+    }
+    // Upload vídeo
+    if(uploads.vid.file){
+      toast('Enviando vídeo...','s');
+      dados.videoUrl=await uploadFile(uploads.vid.file,`produtos/videos/${Date.now()}_${uploads.vid.file.name}`,'prog-vid');
+    } else if(document.getElementById('p-vid-url').value){
+      dados.videoUrl=document.getElementById('p-vid-url').value;
+    }
+    if(editId){await db.collection('produtos').doc(editId).update(dados);toast('Produto atualizado!','s');}
+    else{dados.criado=new Date();await db.collection('produtos').add(dados);toast('Produto adicionado!','s');}
+    limparForm();navTo('produtos');
+  }catch(e){toast('Erro: '+e.message,'e');}
+  btn.disabled=false;btn.textContent='Salvar Produto';
+}
+
+function limparForm(){
+  document.getElementById('edit-id').value='';
+  document.getElementById('form-title').textContent='NOVO PRODUTO';
+  ['p-nome','p-desc','p-linhas','p-rolos','p-maxwin','p-img-url','p-vid-url'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('p-cat').value='slots';
+  document.getElementById('p-vol').value='';
+  document.getElementById('p-rtp').value=96;
+  document.getElementById('rtp-val').textContent=96;
+  document.getElementById('p-plat').value='Mobile + Desktop';
+  document.getElementById('p-jackpot').checked=false;
+  document.getElementById('jackpot-tipo-group').style.display='none';
+  ['prev-img','prev-vid'].forEach(id=>document.getElementById(id).innerHTML='');
+  ['prog-img','prog-vid'].forEach(id=>document.getElementById(id).style.width='0%');
+  uploads.img.file=null;uploads.vid.file=null;
+}
+
+function cancelarEdicao(){navTo('produtos');}
+
+// EDITAR PRODUTO
+function editarProduto(p){
+  document.getElementById('edit-id').value=p.id;
+  document.getElementById('form-title').textContent='EDITAR PRODUTO';
+  document.getElementById('p-nome').value=p.nome||'';
+  document.getElementById('p-cat').value=p.categoria||'slots';
+  document.getElementById('p-desc').value=p.descricao||'';
+  document.getElementById('p-rtp').value=p.rtp||96;
+  document.getElementById('rtp-val').textContent=p.rtp||96;
+  document.getElementById('p-vol').value=p.volatilidade||'';
+  document.getElementById('p-linhas').value=p.linhas||'';
+  document.getElementById('p-rolos').value=p.rolos||'';
+  document.getElementById('p-maxwin').value=p.maxWin||'';
+  document.getElementById('p-plat').value=p.plataformas||'Mobile + Desktop';
+  document.getElementById('p-jackpot').checked=!!p.jackpot;
+  document.getElementById('jackpot-tipo-group').style.display=p.jackpot?'block':'none';
+  if(p.jackpotTipo)document.getElementById('p-jackpot-tipo').value=p.jackpotTipo;
+  if(p.imagemUrl){document.getElementById('p-img-url').value=p.imagemUrl;document.getElementById('prev-img').innerHTML=`<img src="${p.imagemUrl}" style="max-width:100%;max-height:180px;border-radius:6px;">`;}
+  if(p.videoUrl){document.getElementById('p-vid-url').value=p.videoUrl;document.getElementById('prev-vid').innerHTML=`<video src="${p.videoUrl}" controls style="max-width:100%;max-height:180px;border-radius:6px;"></video>`;}
+  navTo('novo');
+}
+
+// DELETAR
+async function deletarProduto(id,nome){
+  if(!confirm(`Deletar "${nome}"?`))return;
+  try{await db.collection('produtos').doc(id).delete();toast('Produto deletado.','s');carregarProdutos();carregarDashboard();}
+  catch(e){toast('Erro ao deletar.','e');}
+}
+
+// CARREGAR PRODUTOS
+async function carregarProdutos(){
+  const tb=document.getElementById('prod-table');
+  tb.innerHTML='<tr class="empty-row"><td colspan="6">Carregando...</td></tr>';
+  try{
+    const snap=await db.collection('produtos').get();
+    if(snap.empty){tb.innerHTML='<tr class="empty-row"><td colspan="6">Nenhum produto cadastrado.</td></tr>';return;}
+    const CATS={slots:'Slots',slots2telas:'Slots 2 Telas',cassino:'Cassino',bingo:'Bingo',jackpots:'Jackpots'};
+    tb.innerHTML=snap.docs.map(doc=>{
+      const p={id:doc.id,...doc.data()};
+      const img=p.imagemUrl?`<img class="td-img" src="${p.imagemUrl}" alt="">`:'<div class="td-img" style="display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🎮</div>';
+      return `<tr>
+        <td>${img}</td>
+        <td style="font-weight:600;">${p.nome}</td>
+        <td><span class="cat-pill">${CATS[p.categoria]||p.categoria}</span></td>
+        <td>${p.rtp?p.rtp+'%':'—'}</td>
+        <td>${p.jackpot?'<span style="color:var(--gold)">⭐ Sim</span>':'Não'}</td>
+        <td style="display:flex;gap:0.5rem;">
+          <button class="action-btn" onclick="editarProduto(${JSON.stringify(p).replace(/"/g,'&quot;')})">Editar</button>
+          <button class="action-btn del" onclick="deletarProduto('${p.id}','${p.nome}')">Deletar</button>
+        </td>
+      </tr>`;
+    }).join('');
+  }catch(e){tb.innerHTML='<tr class="empty-row"><td colspan="6">Erro ao carregar.</td></tr>';}
+}
+
+// DASHBOARD
+async function carregarDashboard(){
+  try{
+    const [snProd,snMsg]=await Promise.all([db.collection('produtos').get(),db.collection('contatos').get()]);
+    const prods=snProd.docs.map(d=>({id:d.id,...d.data()}));
+    document.getElementById('d-total').textContent=prods.length;
+    document.getElementById('d-slots').textContent=prods.filter(p=>p.categoria==='slots').length;
+    document.getElementById('d-cassino').textContent=prods.filter(p=>p.categoria==='cassino').length;
+    document.getElementById('d-msgs').textContent=snMsg.size;
+    const CATS={slots:'Slots',slots2telas:'Slots 2 Telas',cassino:'Cassino',bingo:'Bingo',jackpots:'Jackpots'};
+    document.getElementById('dash-table').innerHTML=prods.slice(0,5).map(p=>`
+      <tr><td style="font-weight:600;">${p.nome}</td><td><span class="cat-pill">${CATS[p.categoria]||p.categoria}</span></td><td>${p.rtp?p.rtp+'%':'—'}</td><td>${p.jackpot?'⭐':'—'}</td></tr>
+    `).join('')||'<tr class="empty-row"><td colspan="4">Sem produtos.</td></tr>';
+  }catch(e){}
+}
+
+// EMPRESA
+async function carregarEmpresaForm(){
+  try{
+    const d=(await db.collection('empresa').doc('info').get()).data();
+    if(!d)return;
+    document.getElementById('e-nome').value=d.nome||'';
+    document.getElementById('e-email').value=d.email||'';
+    document.getElementById('e-tel').value=d.telefone||'';
+    document.getElementById('e-end').value=d.endereco||'';
+    document.getElementById('e-desc').value=d.descricao||'';
+    if(d.imagemUrl){document.getElementById('e-img-url').value=d.imagemUrl;document.getElementById('prev-emp').innerHTML=`<img src="${d.imagemUrl}" style="max-width:100%;max-height:180px;border-radius:6px;">`;}
+  }catch(e){}
+}
+
+async function salvarEmpresa(){
+  const btn=event.target;btn.disabled=true;btn.textContent='Salvando...';
+  try{
+    const dados={nome:document.getElementById('e-nome').value,email:document.getElementById('e-email').value,telefone:document.getElementById('e-tel').value,endereco:document.getElementById('e-end').value,descricao:document.getElementById('e-desc').value,atualizado:new Date()};
+    const empFile=document.getElementById('upload-emp').files[0];
+    if(empFile){toast('Enviando imagem...','s');dados.imagemUrl=await uploadFile(empFile,`empresa/${Date.now()}_${empFile.name}`,'prog-emp');}
+    else if(document.getElementById('e-img-url').value)dados.imagemUrl=document.getElementById('e-img-url').value;
+    await db.collection('empresa').doc('info').set(dados,{merge:true});
+    toast('Empresa atualizada!','s');
+  }catch(e){toast('Erro: '+e.message,'e');}
+  btn.disabled=false;btn.textContent='Salvar Alterações';
+}
+
+// MENSAGENS
+async function carregarMensagens(){
+  const c=document.getElementById('msgs-container');
+  c.innerHTML='<div style="color:var(--gray);text-align:center;padding:3rem;">Carregando...</div>';
+  try{
+    const snap=await db.collection('contatos').orderBy('data','desc').get();
+    if(snap.empty){c.innerHTML='<div style="color:var(--gray);text-align:center;padding:3rem;">Nenhuma mensagem ainda.</div>';return;}
+    c.innerHTML=snap.docs.map(doc=>{
+      const m=doc.data();
+      const dt=m.data?new Date(m.data.seconds*1000).toLocaleString('pt-BR'):'';
+      const assuntos={parceria:'Parceria Comercial',integracao:'Integração de Jogos',suporte:'Suporte Técnico',outro:'Outro'};
+      return `<div class="msg-card">
+        <div class="msg-header"><span class="msg-nome">${m.nome||''}</span><span class="msg-data">${dt}</span></div>
+        <div class="msg-meta">📧 ${m.email||''}${m.empresa?' · 🏢 '+m.empresa:''}${m.assunto?' · '+assuntos[m.assunto]:''}</div>
+        <div class="msg-body">${m.mensagem||''}</div>
+      </div>`;
+    }).join('');
+  }catch(e){c.innerHTML='<div style="color:var(--red);text-align:center;padding:3rem;">Erro ao carregar mensagens.</div>';}
+}
+</script>
+</body>
+</html>
