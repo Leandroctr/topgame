@@ -3,21 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Top Game — Plataforma Premium de Jogos</title>
+<title>Top Game — Jackpot que Prende. Jogador que Volta.</title>
+<meta name="description" content="Jogos de cassino com jackpot inteligente que paga e fideliza. +150 máquinas instaladas, ROI em 15 dias, 7 países.">
 <link rel="icon" type="image/png" href="https://firebasestorage.googleapis.com/v0/b/topgame-site.firebasestorage.app/o/favicon.png?alt=media">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#080c14;--bg2:#0d1320;--bg3:#111827;--gold:#f0b429;--gold2:#ffd166;--red:#e63946;--white:#f0f4f8;--gray:#6b7a99;--border:rgba(240,180,41,0.15);--card:rgba(255,255,255,0.03);--font-d:'Bebas Neue',sans-serif;--font-b:'Outfit',sans-serif;}
+:root{
+  --bg:#080c14;--bg2:#0d1320;--bg3:#111827;
+  --gold:#f0b429;--gold2:#ffd166;--green:#22c55e;--red:#e63946;
+  --white:#f0f4f8;--gray:#6b7a99;--gray2:#9ca7bf;
+  --border:rgba(240,180,41,0.15);--card:rgba(255,255,255,0.03);
+  --font-d:'Bebas Neue',sans-serif;--font-b:'Outfit',sans-serif;
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--font-b);overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:72px;background:rgba(8,12,20,0.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
-.nav-logo{font-family:var(--font-d);font-size:1.8rem;letter-spacing:3px;color:var(--gold);}
-.nav-logo span{color:var(--white);}
+.nav-logo img{height:40px;display:block;}
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
 .nav-links a{color:var(--gray);text-decoration:none;font-size:0.85rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;transition:color 0.3s;}
 .nav-links a:hover{color:var(--gold);}
@@ -26,106 +34,147 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 5%;display:flex;al
 .hamburger{display:none;background:none;border:none;color:var(--white);font-size:1.5rem;cursor:pointer;}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:72px 5% 0;}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 40%,rgba(240,180,41,0.07) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(230,57,70,0.05) 0%,transparent 50%);}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,180,41,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,41,0.03) 1px,transparent 1px);background-size:60px 60px;}
-.hero-content{position:relative;z-index:2;max-width:680px;}
-.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(240,180,41,0.1);border:1px solid var(--border);padding:0.4rem 1rem;border-radius:20px;font-size:0.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;}
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:100px 5% 4rem;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 40%,rgba(240,180,41,0.08) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(230,57,70,0.05) 0%,transparent 50%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,180,41,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(240,180,41,0.03) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(to bottom,black,transparent);}
+.hero-content{position:relative;z-index:2;max-width:780px;}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(240,180,41,0.1);border:1px solid var(--border);padding:0.45rem 1.1rem;border-radius:20px;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2rem;}
 .hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.hero h1{font-family:var(--font-d);font-size:clamp(3rem,7vw,6rem);line-height:0.95;letter-spacing:2px;margin-bottom:1.5rem;}
+.hero h1{font-family:var(--font-d);font-size:clamp(3rem,7.5vw,6.5rem);line-height:0.92;letter-spacing:2px;margin-bottom:1.5rem;}
 .hero h1 em{font-style:normal;color:var(--gold);}
-.hero p{color:var(--gray);font-size:1.05rem;line-height:1.7;max-width:500px;margin-bottom:2.5rem;}
+.hero-sub{color:var(--gray2);font-size:1.1rem;line-height:1.7;max-width:580px;margin-bottom:2.5rem;}
+.hero-sub strong{color:var(--white);font-weight:600;}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
-.btn-p{background:var(--gold);color:var(--bg);padding:0.9rem 2rem;border-radius:4px;font-weight:700;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;font-family:var(--font-b);}
-.btn-p:hover{background:var(--gold2);transform:translateY(-2px);}
-.btn-o{background:transparent;color:var(--white);padding:0.9rem 2rem;border-radius:4px;font-weight:600;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,0.2);cursor:pointer;transition:all 0.3s;}
+.btn-p{background:var(--gold);color:var(--bg);padding:1rem 2.2rem;border-radius:4px;font-weight:700;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:none;cursor:pointer;transition:all 0.3s;font-family:var(--font-b);display:inline-flex;align-items:center;gap:0.5rem;}
+.btn-p:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 10px 30px rgba(240,180,41,0.3);}
+.btn-o{background:transparent;color:var(--white);padding:1rem 2.2rem;border-radius:4px;font-weight:600;font-size:0.85rem;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:1px solid rgba(255,255,255,0.2);cursor:pointer;transition:all 0.3s;}
 .btn-o:hover{border-color:var(--gold);color:var(--gold);}
-.hero-stats{position:absolute;right:5%;bottom:8%;display:flex;gap:3rem;}
-.stat{text-align:center;}
-.stat-num{font-family:var(--font-d);font-size:2.5rem;color:var(--gold);letter-spacing:2px;}
-.stat-label{font-size:0.7rem;color:var(--gray);letter-spacing:2px;text-transform:uppercase;}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.stat{text-align:left;}
+.stat-num{font-family:var(--font-d);font-size:2.4rem;color:var(--gold);letter-spacing:2px;line-height:1;}
+.stat-label{font-size:0.7rem;color:var(--gray);letter-spacing:2px;text-transform:uppercase;margin-top:0.4rem;}
 
 /* SECTIONS */
 section{padding:6rem 5%;}
 .section-label{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.75rem;}
-.section-title{font-family:var(--font-d);font-size:clamp(2rem,4vw,3.2rem);letter-spacing:2px;margin-bottom:1rem;}
-.section-sub{color:var(--gray);font-size:1rem;line-height:1.7;max-width:600px;}
+.section-title{font-family:var(--font-d);font-size:clamp(2rem,4.5vw,3.4rem);letter-spacing:2px;margin-bottom:1rem;line-height:1;}
+.section-title em{font-style:normal;color:var(--gold);}
+.section-sub{color:var(--gray2);font-size:1.02rem;line-height:1.7;max-width:640px;}
 
-/* PRODUTOS */
-#produtos{background:var(--bg2);}
-.produtos-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1.5rem;}
+/* BENEFICIOS */
+#beneficios{background:var(--bg2);}
+.bens-head{text-align:center;margin-bottom:4rem;}
+.bens-head .section-sub{margin:0 auto;}
+.bens-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.ben{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2rem;transition:all 0.3s;}
+.ben:hover{border-color:rgba(240,180,41,0.4);transform:translateY(-4px);}
+.ben-num{font-family:var(--font-d);font-size:3rem;color:var(--gold);letter-spacing:2px;line-height:1;margin-bottom:0.4rem;}
+.ben-h{font-size:1.05rem;font-weight:700;margin-bottom:0.6rem;letter-spacing:0.5px;}
+.ben-t{color:var(--gray2);font-size:0.92rem;line-height:1.65;}
+
+/* PRODUTOS — NETFLIX STYLE */
+#produtos{background:var(--bg);}
+.produtos-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1.5rem;}
 .filtros{display:flex;gap:0.6rem;flex-wrap:wrap;}
 .filtro-btn{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--gray);padding:0.45rem 1.1rem;border-radius:20px;font-size:0.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:var(--font-b);}
 .filtro-btn:hover,.filtro-btn.active{background:var(--gold);border-color:var(--gold);color:var(--bg);}
-.produtos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem;}
-.produto-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:all 0.3s;}
-.produto-card:hover{transform:translateY(-6px);border-color:rgba(240,180,41,0.4);box-shadow:0 20px 40px rgba(0,0,0,0.5);}
-.produto-thumb{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#0d1320,#1a2540);overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.produtos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.produto-card{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;cursor:pointer;transition:all 0.3s;position:relative;}
+.produto-card:hover{transform:translateY(-6px) scale(1.02);border-color:rgba(240,180,41,0.5);box-shadow:0 20px 40px rgba(0,0,0,0.6);z-index:2;}
+.produto-thumb{position:relative;aspect-ratio:3/4;background:linear-gradient(135deg,#0d1320,#1a2540);overflow:hidden;display:flex;align-items:center;justify-content:center;}
 .produto-thumb img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;}
-.produto-card:hover .produto-thumb img{transform:scale(1.06);}
-.thumb-ph{font-size:2.5rem;opacity:0.25;}
-.thumb-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,20,0.9) 0%,transparent 50%);opacity:0;transition:opacity 0.3s;}
-.produto-card:hover .thumb-ov{opacity:1;}
-.thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;}
+.produto-card:hover .produto-thumb img{transform:scale(1.08);}
+.thumb-ph{font-size:3rem;opacity:0.25;}
+.thumb-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,12,20,0.95) 0%,rgba(8,12,20,0.5) 35%,transparent 65%);}
+.thumb-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;background:rgba(8,12,20,0.4);}
 .produto-card:hover .thumb-play{opacity:1;}
-.play-btn{width:48px;height:48px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--bg);}
-.prod-cat{position:absolute;top:0.65rem;left:0.65rem;background:rgba(240,180,41,0.9);color:var(--bg);padding:0.2rem 0.65rem;border-radius:3px;font-size:0.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
-.produto-body{padding:1.1rem;}
-.prod-name{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;}
-.prod-rtp{font-size:0.78rem;color:var(--gray);}
-.prod-rtp span{color:var(--gold);font-weight:600;}
-.prod-badges{display:flex;gap:0.4rem;margin-top:0.6rem;flex-wrap:wrap;}
-.badge{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);padding:0.18rem 0.55rem;border-radius:3px;font-size:0.65rem;color:var(--gray);}
-.badge.jp{border-color:rgba(240,180,41,0.3);color:var(--gold);}
+.play-btn{width:54px;height:54px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--bg);box-shadow:0 8px 20px rgba(240,180,41,0.4);}
+.prod-cat{position:absolute;top:0.65rem;left:0.65rem;background:rgba(240,180,41,0.95);color:var(--bg);padding:0.22rem 0.6rem;border-radius:3px;font-size:0.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.prod-jp-badge{position:absolute;top:0.65rem;right:0.65rem;background:rgba(34,197,94,0.95);color:var(--bg);padding:0.22rem 0.6rem;border-radius:3px;font-size:0.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.produto-info-bottom{position:absolute;bottom:0;left:0;right:0;padding:0.85rem 0.9rem;z-index:2;}
+.prod-name{font-size:0.95rem;font-weight:700;margin-bottom:0.25rem;text-shadow:0 2px 8px rgba(0,0,0,0.6);}
+.prod-meta{display:flex;gap:0.5rem;font-size:0.7rem;color:var(--gold);font-weight:600;letter-spacing:0.5px;}
 .empty-state{grid-column:1/-1;text-align:center;padding:4rem;color:var(--gray);}
 
-/* MODAL */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(4px);}
+/* MODAL NETFLIX */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:1000;display:flex;align-items:flex-start;justify-content:center;padding:2rem 1rem;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(6px);overflow-y:auto;}
 .modal-ov.open{opacity:1;pointer-events:all;}
-.modal{background:var(--bg3);border:1px solid var(--border);border-radius:12px;max-width:860px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
-.modal-x{position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,0.5);border:none;color:var(--white);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;z-index:10;display:flex;align-items:center;justify-content:center;transition:background 0.3s;}
+.modal{background:var(--bg3);border:1px solid var(--border);border-radius:12px;max-width:1100px;width:100%;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,0.8);}
+.modal-x{position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,0.6);border:none;color:var(--white);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.1rem;z-index:10;display:flex;align-items:center;justify-content:center;transition:background 0.3s;}
 .modal-x:hover{background:var(--red);}
-.modal-media{aspect-ratio:16/9;background:#080c14;border-radius:12px 12px 0 0;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.modal-media img,.modal-media video{width:100%;height:100%;object-fit:cover;}
-.modal-media-ph{font-size:6rem;opacity:0.15;}
-.modal-body{padding:2rem;}
-.modal-cat-label{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.4rem;}
-.modal-title{font-family:var(--font-d);font-size:1.8rem;letter-spacing:2px;margin-bottom:0.75rem;}
-.modal-desc{color:var(--gray);line-height:1.7;font-size:0.95rem;margin-bottom:1.75rem;}
-.modal-specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:0.75rem;}
-.spec-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:6px;padding:0.9rem;text-align:center;}
-.spec-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:0.35rem;}
-.spec-value{font-size:1rem;font-weight:700;color:var(--gold);}
+.modal-media{aspect-ratio:16/9;background:#000;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;}
+.modal-media video{width:100%;height:100%;object-fit:contain;background:#000;}
+.modal-media img{width:100%;height:100%;object-fit:cover;}
+.modal-media-ph{font-size:5rem;opacity:0.2;}
+.modal-media-grad{position:absolute;bottom:0;left:0;right:0;height:30%;background:linear-gradient(to top,var(--bg3),transparent);pointer-events:none;}
+.modal-body{padding:2rem 2.5rem 2.5rem;display:grid;grid-template-columns:1.6fr 1fr;gap:2.5rem;}
+.modal-cat-label{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:0.5rem;}
+.modal-title{font-family:var(--font-d);font-size:2.2rem;letter-spacing:2px;margin-bottom:1rem;line-height:1;}
+.modal-desc{color:var(--gray2);line-height:1.75;font-size:0.98rem;margin-bottom:1.5rem;}
+.modal-side h4{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:1rem;}
+.modal-specs{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;}
+.spec-box{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:6px;padding:0.85rem;}
+.spec-label{font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:0.3rem;}
+.spec-value{font-size:0.95rem;font-weight:700;color:var(--gold);font-family:var(--font-b);}
+.modal-cta{margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap;}
+
+/* COMO COMECAR */
+#como-comecar{background:var(--bg2);position:relative;}
+.cc-head{text-align:center;margin-bottom:4rem;}
+.cc-head .section-sub{margin:0 auto;}
+.cc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto;}
+.cc-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:2.5rem 2rem;text-align:center;position:relative;transition:all 0.3s;}
+.cc-card:hover{border-color:rgba(240,180,41,0.4);transform:translateY(-4px);}
+.cc-step{position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:44px;height:44px;background:var(--gold);color:var(--bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:1.4rem;letter-spacing:1px;border:4px solid var(--bg2);}
+.cc-h{font-size:1.1rem;font-weight:700;margin:1rem 0 0.6rem;letter-spacing:0.5px;}
+.cc-t{color:var(--gray2);font-size:0.92rem;line-height:1.65;}
+
+/* POR QUE TOP GAME */
+#por-que{background:var(--bg);}
+.pq-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.pq-text .section-title{margin-bottom:1.5rem;}
+.pq-list{display:flex;flex-direction:column;gap:1.25rem;margin-top:2rem;}
+.pq-item{display:flex;gap:1rem;align-items:flex-start;}
+.pq-icon{width:42px;height:42px;background:rgba(240,180,41,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.05rem;}
+.pq-it-h{font-size:0.98rem;font-weight:700;margin-bottom:0.25rem;}
+.pq-it-t{color:var(--gray2);font-size:0.9rem;line-height:1.6;}
+.pq-visual{position:relative;}
+.pq-img-box{width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,#0d1320,#1a2540);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:6rem;overflow:hidden;}
+.pq-img-box img{width:100%;height:100%;object-fit:cover;}
+.pq-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--gold);color:var(--bg);padding:1.4rem 1.7rem;border-radius:10px;text-align:center;box-shadow:0 15px 40px rgba(240,180,41,0.25);}
+.accent-num{font-family:var(--font-d);font-size:2.4rem;line-height:1;letter-spacing:1px;}
+.accent-label{font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-top:0.2rem;}
 
 /* SOBRE */
-#sobre{background:var(--bg);}
-.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
-.sobre-visual{position:relative;}
-.sobre-img-box{width:100%;aspect-ratio:4/3;background:var(--bg3);border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:5rem;overflow:hidden;}
-.sobre-img-box img{width:100%;height:100%;object-fit:cover;}
-.sobre-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--gold);color:var(--bg);padding:1.25rem 1.5rem;border-radius:8px;text-align:center;}
-.accent-num{font-family:var(--font-d);font-size:2rem;line-height:1;}
-.accent-label{font-size:0.65rem;letter-spacing:1px;text-transform:uppercase;font-weight:700;}
-.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2.5rem;}
-.feature{display:flex;gap:0.75rem;align-items:flex-start;}
-.feat-icon{width:38px;height:38px;background:rgba(240,180,41,0.08);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.95rem;}
-.feat-text h4{font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;}
-.feat-text p{font-size:0.78rem;color:var(--gray);line-height:1.5;}
+#sobre{background:var(--bg2);}
+.sobre-wrap{max-width:900px;margin:0 auto;text-align:center;}
+.sobre-wrap p{color:var(--gray2);font-size:1.05rem;line-height:1.85;margin-bottom:1.5rem;}
+
+/* CTA BLOCK */
+.cta-block{background:linear-gradient(135deg,rgba(240,180,41,0.08),rgba(240,180,41,0.02));border:1px solid var(--border);border-radius:14px;padding:3.5rem 3rem;text-align:center;margin-top:5rem;}
+.cta-block h3{font-family:var(--font-d);font-size:clamp(1.8rem,3.5vw,2.6rem);letter-spacing:2px;margin-bottom:1rem;}
+.cta-block h3 em{font-style:normal;color:var(--gold);}
+.cta-block p{color:var(--gray2);font-size:1rem;line-height:1.6;max-width:520px;margin:0 auto 2rem;}
 
 /* CONTATO */
-#contato{background:var(--bg2);}
-.contato-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
-.c-info{display:flex;flex-direction:column;gap:1.75rem;}
+#contato{background:var(--bg);}
+.contato-head{text-align:center;margin-bottom:3.5rem;}
+.contato-head .section-sub{margin:0 auto;}
+.contato-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start;}
+.c-info{display:flex;flex-direction:column;gap:1.5rem;}
 .c-item{display:flex;gap:1rem;}
 .c-icon{width:44px;height:44px;background:rgba(240,180,41,0.08);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
 .c-item-text h4{font-size:0.85rem;font-weight:700;margin-bottom:0.2rem;}
-.c-item-text p{font-size:0.9rem;color:var(--gray);}
-.form-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:8px;padding:2rem;}
+.c-item-text p{font-size:0.92rem;color:var(--gray2);}
+.c-promise{margin-top:1rem;padding:1.2rem;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.2);border-radius:8px;}
+.c-promise-h{font-size:0.78rem;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:0.4rem;display:flex;align-items:center;gap:0.4rem;}
+.c-promise-t{font-size:0.86rem;color:var(--gray2);line-height:1.55;}
+.form-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:2rem;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
 .fg{margin-bottom:1.1rem;}
 .fg label{display:block;font-size:0.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-bottom:0.4rem;}
-.fg input,.fg textarea,.fg select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:0.7rem 0.9rem;color:var(--white);font-family:var(--font-b);font-size:0.9rem;transition:border-color 0.3s;}
+.fg input,.fg textarea,.fg select{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:6px;padding:0.75rem 0.95rem;color:var(--white);font-family:var(--font-b);font-size:0.92rem;transition:border-color 0.3s;}
 .fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--gold);}
 .fg textarea{resize:vertical;min-height:110px;}
 .fg select option{background:var(--bg3);}
@@ -133,9 +182,9 @@ section{padding:6rem 5%;}
 /* FOOTER */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 5%;}
 .footer-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.f-logo{font-family:var(--font-d);font-size:1.4rem;letter-spacing:3px;color:var(--gold);}
+.f-logo img{height:35px;display:block;}
 .f-copy{font-size:0.78rem;color:var(--gray);}
-.f-admin{font-size:0.72rem;color:rgba(255,255,255,0.08);text-decoration:none;transition:color 0.3s;}
+.f-admin{font-size:0.72rem;color:rgba(255,255,255,0.12);text-decoration:none;transition:color 0.3s;}
 .f-admin:hover{color:var(--gold);}
 
 /* LOADER */
@@ -146,25 +195,29 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 5%
 
 /* TOAST */
 .toasts{position:fixed;bottom:2rem;right:2rem;z-index:9998;display:flex;flex-direction:column;gap:0.75rem;}
-.toast{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:0.9rem 1.4rem;font-size:0.88rem;animation:slideIn 0.3s;max-width:280px;}
-@keyframes slideIn{from{transform:translateX(300px);}to{transform:translateX(0);}}
-.toast.s{border-left:3px solid #22c55e;}
+.toast{background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:0.9rem 1.4rem;font-size:0.88rem;animation:slideIn 0.3s;max-width:300px;}
+@keyframes slideIn{from{transform:translateX(320px);}to{transform:translateX(0);}}
+.toast.s{border-left:3px solid var(--green);}
 .toast.e{border-left:3px solid var(--red);}
 
 /* RESPONSIVE */
-@media(max-width:900px){
+@media(max-width:980px){
   .nav-links,.nav-cta{display:none;}
   .hamburger{display:block;}
-  .hero-stats{display:none;}
-  .sobre-grid,.contato-grid{grid-template-columns:1fr;}
-  .sobre-accent{display:none;}
+  .pq-grid,.contato-grid{grid-template-columns:1fr;gap:3rem;}
+  .pq-accent{display:none;}
+  .modal-body{grid-template-columns:1fr;gap:1.5rem;padding:1.5rem 1.5rem 2rem;}
   .form-row{grid-template-columns:1fr;}
-  .modal-specs{grid-template-columns:repeat(2,1fr);}
+  .hero-stats{gap:2rem;}
+  .stat-num{font-size:2rem;}
 }
 @media(max-width:600px){
-  section{padding:3.5rem 5%;}
-  .produtos-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}
-  .hero h1{font-size:clamp(2.5rem,10vw,3.5rem);}
+  section{padding:4rem 5%;}
+  .produtos-grid{grid-template-columns:repeat(2,1fr);gap:0.75rem;}
+  .hero h1{font-size:clamp(2.5rem,11vw,3.6rem);}
+  .modal-title{font-size:1.6rem;}
+  .modal-specs{grid-template-columns:1fr 1fr;}
+  .cta-block{padding:2.5rem 1.5rem;}
 }
 </style>
 </head>
@@ -173,104 +226,198 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 5%
 <div class="loader" id="loader"><div class="loader-txt">TOP GAME</div></div>
 
 <nav>
-  <div class="nav-logo"><img src="https://firebasestorage.googleapis.com/v0/b/topgame-site.firebasestorage.app/o/logotipo.png?alt=media" alt="Top Game" style="height:40px;"></div>
+  <a href="#home" class="nav-logo"><img src="https://firebasestorage.googleapis.com/v0/b/topgame-site.firebasestorage.app/o/logotipo.png?alt=media" alt="Top Game"></a>
   <ul class="nav-links">
     <li><a href="#home">Início</a></li>
-    <li><a href="#produtos">Produtos</a></li>
-    <li><a href="#sobre">Empresa</a></li>
+    <li><a href="#produtos">Jogos</a></li>
+    <li><a href="#por-que">Por que Top Game</a></li>
     <li><a href="#contato">Contato</a></li>
   </ul>
-  <a href="admin.html" class="nav-cta">Área Restrita</a>
+  <a href="#contato" class="nav-cta">Quero Saber Mais</a>
   <button class="hamburger" onclick="toggleMob()">☰</button>
 </nav>
 
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge">🎮 Plataforma Premium de Jogos</div>
-    <h1>ENTRETENIMENTO<br>DE <em>ALTO NÍVEL</em></h1>
-    <p>Líder em desenvolvimento de jogos eletrônicos. Slots, cassino ao vivo, bingo e jackpots progressivos com a mais alta tecnologia.</p>
+    <div class="hero-badge">Operando em 7 países • +150 máquinas no Brasil</div>
+    <h1>JACKPOT QUE PRENDE.<br><em>JOGADOR QUE VOLTA.</em></h1>
+    <p class="hero-sub">Seu cliente está saindo do estabelecimento porque <strong>os jogos atuais não pagam</strong>. A Top Game resolve isso com <strong>tecnologia exclusiva de jackpot inteligente</strong> — paga, fideliza e multiplica o tempo de jogo em <strong>até 200%</strong>.</p>
     <div class="hero-btns">
-      <a href="#produtos" class="btn-p">Explorar Produtos</a>
-      <a href="#contato" class="btn-o">Falar Conosco</a>
+      <a href="#contato" class="btn-p">Quero Faturar Mais →</a>
+      <a href="#produtos" class="btn-o">Ver Jogos</a>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num" id="stat-jogos">0</div><div class="stat-label">Jogos</div></div>
-    <div class="stat"><div class="stat-num">99%</div><div class="stat-label">Uptime</div></div>
-    <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Suporte</div></div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">+150</div><div class="stat-label">Máquinas instaladas</div></div>
+      <div class="stat"><div class="stat-num">15 dias</div><div class="stat-label">ROI médio</div></div>
+      <div class="stat"><div class="stat-num">+200%</div><div class="stat-label">Tempo de jogo</div></div>
+      <div class="stat"><div class="stat-num">7</div><div class="stat-label">Países</div></div>
+    </div>
   </div>
 </section>
 
+<!-- BENEFICIOS -->
+<section id="beneficios">
+  <div class="bens-head">
+    <div class="section-label">Por que operadores escolhem Top Game</div>
+    <h2 class="section-title">3 RAZÕES QUE <em>MUDAM SEU FATURAMENTO</em></h2>
+    <p class="section-sub">Não é só trocar a máquina. É transformar a experiência do jogador e a sua margem.</p>
+  </div>
+  <div class="bens-grid">
+    <div class="ben">
+      <div class="ben-num">+200%</div>
+      <h3 class="ben-h">Tempo de jogo</h3>
+      <p class="ben-t">Nossos jogos prendem o jogador. Mais sessões, mais rodadas, mais ticket médio por máquina — sem precisar atrair novos clientes.</p>
+    </div>
+    <div class="ben">
+      <div class="ben-num">15 dias</div>
+      <h3 class="ben-h">Retorno do investimento</h3>
+      <p class="ben-t">ROI rápido e previsível. Operadores recuperam o upgrade em duas semanas e seguem lucrando com margem maior nos meses seguintes.</p>
+    </div>
+    <div class="ben">
+      <div class="ben-num">RTP 90–95%</div>
+      <h3 class="ben-h">Jackpot que paga e avisa</h3>
+      <p class="ben-t">Tecnologia exclusiva: o acumulado tem teto e o sistema avisa o jogador antes de pagar. Resultado? Fidelização real e jogadores que voltam todo dia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS — NETFLIX STYLE -->
 <section id="produtos">
   <div class="produtos-header">
     <div>
-      <div class="section-label">Portfólio</div>
-      <h2 class="section-title">NOSSOS JOGOS</h2>
+      <div class="section-label">Portfólio · 60+ jogos</div>
+      <h2 class="section-title">NOSSOS <em>JOGOS</em></h2>
+      <p class="section-sub" style="margin-top:0.5rem;">Clique em qualquer jogo para ver o gameplay completo.</p>
     </div>
     <div class="filtros">
       <button class="filtro-btn active" data-cat="todos" onclick="filtrar(this)">Todos</button>
       <button class="filtro-btn" data-cat="slots" onclick="filtrar(this)">Slots</button>
-      <button class="filtro-btn" data-cat="slots2telas" onclick="filtrar(this)">Slots 2 Telas</button>
+      <button class="filtro-btn" data-cat="slots2telas" onclick="filtrar(this)">2 Telas</button>
       <button class="filtro-btn" data-cat="cassino" onclick="filtrar(this)">Cassino</button>
       <button class="filtro-btn" data-cat="bingo" onclick="filtrar(this)">Bingo</button>
       <button class="filtro-btn" data-cat="jackpots" onclick="filtrar(this)">Jackpots</button>
     </div>
   </div>
   <div class="produtos-grid" id="produtos-grid"><div class="empty-state">Carregando jogos...</div></div>
+
+  <div class="cta-block">
+    <h3>QUER VER OS JOGOS <em>RODANDO NA SUA MÁQUINA?</em></h3>
+    <p>Agendamos uma demonstração presencial sem compromisso. Você vê funcionando antes de decidir.</p>
+    <a href="#contato" class="btn-p">Agendar Demonstração</a>
+  </div>
 </section>
 
-<section id="sobre">
-  <div class="sobre-grid">
-    <div class="sobre-visual">
-      <div class="sobre-img-box" id="sobre-img">🏢</div>
-      <div class="sobre-accent"><div class="accent-num">10+</div><div class="accent-label">Anos de mercado</div></div>
+<!-- COMO COMECAR -->
+<section id="como-comecar">
+  <div class="cc-head">
+    <div class="section-label">Processo simples</div>
+    <h2 class="section-title">COMO <em>COMEÇAR</em></h2>
+    <p class="section-sub">Em 3 passos você está faturando mais com as mesmas máquinas que já tem.</p>
+  </div>
+  <div class="cc-grid">
+    <div class="cc-card">
+      <div class="cc-step">1</div>
+      <h3 class="cc-h">Diagnóstico Grátis</h3>
+      <p class="cc-t">Nossa equipe analisa sua operação e identifica quais máquinas têm baixa performance. Consultoria sem custo e sem compromisso.</p>
     </div>
-    <div>
-      <div class="section-label">Quem somos</div>
-      <h2 class="section-title" id="emp-nome-pub">TOP GAME</h2>
-      <p id="emp-desc-pub" style="color:var(--gray);line-height:1.8;margin-bottom:2rem;">Referência em soluções de entretenimento eletrônico, com foco em tecnologia de ponta, segurança e experiência do jogador.</p>
-      <div class="features-grid">
-        <div class="feature"><div class="feat-icon">🔒</div><div class="feat-text"><h4>Segurança</h4><p>Certificados e auditados por organismos independentes</p></div></div>
-        <div class="feature"><div class="feat-icon">📱</div><div class="feat-text"><h4>Mobile First</h4><p>Experiência perfeita em qualquer dispositivo</p></div></div>
-        <div class="feature"><div class="feat-icon">🎯</div><div class="feat-text"><h4>Alta Performance</h4><p>99% de uptime com servidores dedicados</p></div></div>
-        <div class="feature"><div class="feat-icon">🌎</div><div class="feat-text"><h4>Multiplataforma</h4><p>Integração via API única para todos os produtos</p></div></div>
-      </div>
+    <div class="cc-card">
+      <div class="cc-step">2</div>
+      <h3 class="cc-h">Upgrade dos Jogos</h3>
+      <p class="cc-t">Trocamos os jogos fracos pelos nossos. Sua máquina fica como nova, sem você comprar equipamento novo. Instalação rápida e profissional.</p>
+    </div>
+    <div class="cc-card">
+      <div class="cc-step">3</div>
+      <h3 class="cc-h">Lucre em 15 dias</h3>
+      <p class="cc-t">Seus jogadores voltam, jogam mais e o ticket médio sobe. ROI em 15 dias, comprovado em +150 instalações no Brasil.</p>
     </div>
   </div>
 </section>
 
+<!-- POR QUE TOP GAME -->
+<section id="por-que">
+  <div class="pq-grid">
+    <div class="pq-text">
+      <div class="section-label">Diferencial competitivo</div>
+      <h2 class="section-title">POR QUE <em>TOP GAME</em></h2>
+      <p class="section-sub">30 anos de mercado internacional. Tecnologia que nenhum concorrente entrega no Brasil.</p>
+      <div class="pq-list">
+        <div class="pq-item">
+          <div class="pq-icon">🎯</div>
+          <div><div class="pq-it-h">Jackpot com teto inteligente</div><div class="pq-it-t">O acumulado sobe até um limite (ex: R$ 50, R$ 1.000) e o sistema avisa o jogador. Cria urgência, fideliza e protege sua margem.</div></div>
+        </div>
+        <div class="pq-item">
+          <div class="pq-icon">🌎</div>
+          <div><div class="pq-it-h">Tecnologia internacional</div><div class="pq-it-t">Operamos em 7 países com 30 anos de experiência. Trazemos para o Brasil o que já é padrão nos cassinos da Europa e América Latina.</div></div>
+        </div>
+        <div class="pq-item">
+          <div class="pq-icon">⚡</div>
+          <div><div class="pq-it-h">Você não compra máquina nova</div><div class="pq-it-t">Fazemos upgrade nos equipamentos que você já tem. Investimento menor, retorno maior, sem dor de cabeça com logística.</div></div>
+        </div>
+        <div class="pq-item">
+          <div class="pq-icon">📈</div>
+          <div><div class="pq-it-h">Case real: R$ 1M em 30 dias</div><div class="pq-it-t">Operador parceiro em São Paulo faturou R$ 1.000.000 em um único mês após o upgrade Top Game. Resultado documentado, replicável.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="pq-visual">
+      <div class="pq-img-box" id="pq-img">🎰</div>
+      <div class="pq-accent"><div class="accent-num">30 ANOS</div><div class="accent-label">de mercado</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre-wrap">
+    <div class="section-label">Sobre a Top Game</div>
+    <h2 class="section-title" id="emp-nome-pub">A EMPRESA POR TRÁS DOS NÚMEROS</h2>
+    <p id="emp-desc-pub">A Top Game é referência internacional em entretenimento eletrônico, com 30 anos de mercado e operação em 7 países. Chegamos ao Brasil para profissionalizar o setor: trocamos jogos que não performam por jogos que prendem, pagam e fidelizam.</p>
+    <p>Nosso compromisso é com o operador que vive do dia a dia da máquina. Por isso entregamos tecnologia, suporte presencial e resultado em até 15 dias.</p>
+  </div>
+</section>
+
+<!-- CONTATO -->
 <section id="contato">
-  <div style="text-align:center;margin-bottom:3.5rem;">
-    <div class="section-label">Fale conosco</div>
-    <h2 class="section-title">ENTRE EM CONTATO</h2>
-    <p class="section-sub" style="margin:0 auto;">Estamos prontos para apresentar nossas soluções e discutir como podemos transformar sua plataforma.</p>
+  <div class="contato-head">
+    <div class="section-label">Vamos conversar</div>
+    <h2 class="section-title">FATURE MAIS <em>A PARTIR DE HOJE</em></h2>
+    <p class="section-sub">Mais de 50 instalações já agendadas para este mês. Reserve sua consultoria gratuita.</p>
   </div>
   <div class="contato-grid">
     <div class="c-info">
-      <div class="c-item"><div class="c-icon">📧</div><div class="c-item-text"><h4>Email</h4><p id="info-email">contato@topgame.com.br</p></div></div>
-      <div class="c-item"><div class="c-icon">📱</div><div class="c-item-text"><h4>WhatsApp</h4><p id="info-tel">+55 (11) 9999-9999</p></div></div>
-      <div class="c-item"><div class="c-icon">📍</div><div class="c-item-text"><h4>Endereço</h4><p id="info-end">São Paulo, SP — Brasil</p></div></div>
-      <div class="c-item"><div class="c-icon">🕐</div><div class="c-item-text"><h4>Horário</h4><p>Seg a Sex: 09h às 18h</p></div></div>
+      <div class="c-item"><div class="c-icon">📱</div><div class="c-item-text"><h4>WhatsApp Direto</h4><p id="info-tel">+55 (11) 9999-9999</p></div></div>
+      <div class="c-item"><div class="c-icon">📧</div><div class="c-item-text"><h4>Email comercial</h4><p id="info-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="67040809130613082713081700060a024904080a490515">[email&#160;protected]</a></p></div></div>
+      <div class="c-item"><div class="c-icon">📍</div><div class="c-item-text"><h4>Atendimento</h4><p id="info-end">Brasil — Atendemos todo o território nacional</p></div></div>
+      <div class="c-item"><div class="c-icon">🕐</div><div class="c-item-text"><h4>Horário</h4><p>Seg a Sáb: 09h às 20h</p></div></div>
+      <div class="c-promise">
+        <div class="c-promise-h">✓ Sem compromisso</div>
+        <div class="c-promise-t">Consultoria 100% gratuita. Você só paga se decidir fazer o upgrade. Resposta em até 2 horas no horário comercial.</div>
+      </div>
     </div>
     <div class="form-card">
       <form id="form-contato">
         <div class="form-row">
           <div class="fg"><label>Nome</label><input type="text" id="f-nome" placeholder="Seu nome" required></div>
-          <div class="fg"><label>Email</label><input type="email" id="f-email" placeholder="seu@email.com" required></div>
+          <div class="fg"><label>WhatsApp</label><input type="tel" id="f-tel" placeholder="(00) 00000-0000" required></div>
         </div>
-        <div class="fg"><label>Empresa</label><input type="text" id="f-empresa" placeholder="Nome da sua empresa"></div>
-        <div class="fg"><label>Assunto</label>
+        <div class="form-row">
+          <div class="fg"><label>Email</label><input type="email" id="f-email" placeholder="seu@email.com" required></div>
+          <div class="fg"><label>Empresa</label><input type="text" id="f-empresa" placeholder="Nome do estabelecimento"></div>
+        </div>
+        <div class="fg"><label>Quantas máquinas você opera?</label>
           <select id="f-assunto">
-            <option value="parceria">Parceria Comercial</option>
-            <option value="integracao">Integração de Jogos</option>
-            <option value="suporte">Suporte Técnico</option>
-            <option value="outro">Outro</option>
+            <option value="1-5">1 a 5 máquinas</option>
+            <option value="6-20">6 a 20 máquinas</option>
+            <option value="21-50">21 a 50 máquinas</option>
+            <option value="50+">Mais de 50 máquinas</option>
+            <option value="parceria">Parceria comercial</option>
           </select>
         </div>
-        <div class="fg"><label>Mensagem</label><textarea id="f-msg" placeholder="Descreva seu interesse..." required></textarea></div>
-        <button type="submit" class="btn-p" style="width:100%;">Enviar Mensagem</button>
+        <div class="fg"><label>Mensagem (opcional)</label><textarea id="f-msg" placeholder="Conte um pouco sobre sua operação..."></textarea></div>
+        <button type="submit" class="btn-p" style="width:100%;justify-content:center;">Quero Falar com a Top Game →</button>
       </form>
     </div>
   </div>
@@ -278,31 +425,38 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2.5rem 5%
 
 <footer>
   <div class="footer-in">
-    <div class="f-logo"><img src="https://firebasestorage.googleapis.com/v0/b/topgame-site.firebasestorage.app/o/logotipo.png?alt=media" alt="Top Game" style="height:35px;"></div>
-    <div class="f-copy">© 2024 Top Game. Todos os direitos reservados.</div>
+    <div class="f-logo"><img src="https://firebasestorage.googleapis.com/v0/b/topgame-site.firebasestorage.app/o/logotipo.png?alt=media" alt="Top Game"></div>
+    <div class="f-copy">© 2026 Top Game. Jackpot que prende. Jogador que volta.</div>
     <a href="admin.html" class="f-admin">Acesso Admin</a>
   </div>
 </footer>
 
-<!-- MODAL -->
+<!-- MODAL NETFLIX -->
 <div class="modal-ov" id="modal" onclick="closeModalOv(event)">
   <div class="modal" id="modal-box">
     <button class="modal-x" onclick="fecharModal()">✕</button>
-    <div class="modal-media" id="modal-media"><div class="modal-media-ph">🎮</div></div>
+    <div class="modal-media" id="modal-media"><div class="modal-media-ph">🎮</div><div class="modal-media-grad"></div></div>
     <div class="modal-body">
-      <div class="modal-cat-label" id="modal-cat"></div>
-      <h2 class="modal-title" id="modal-title"></h2>
-      <p class="modal-desc" id="modal-desc"></p>
-      <div class="modal-specs" id="modal-specs"></div>
+      <div class="modal-main">
+        <div class="modal-cat-label" id="modal-cat"></div>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-cta">
+          <a href="#contato" class="btn-p" onclick="fecharModal()">Quero esse jogo na minha máquina →</a>
+        </div>
+      </div>
+      <div class="modal-side">
+        <h4>Especificações</h4>
+        <div class="modal-specs" id="modal-specs"></div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="toasts" id="toasts"></div>
 
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-
 <script>
 const firebaseConfig={apiKey:"AIzaSyBZ6U2o_-JIF0lpPJ6Cc1VqkSU4DLuU8J0",authDomain:"topgame-site.firebaseapp.com",projectId:"topgame-site",storageBucket:"topgame-site.firebasestorage.app",messagingSenderId:"55247206603",appId:"1:55247206603:web:a7a66e393e6cd8569f834e"};
 firebase.initializeApp(firebaseConfig);
@@ -327,19 +481,23 @@ function filtrar(btn){
 
 function renderProds(lista){
   const g=document.getElementById('produtos-grid');
-  if(!lista.length){g.innerHTML='<div class="empty-state">Nenhum produto encontrado.</div>';return;}
+  if(!lista.length){g.innerHTML='<div class="empty-state">Nenhum jogo encontrado nesta categoria.</div>';return;}
   g.innerHTML=lista.map(p=>{
     const thumb=p.imagemUrl?`<img src="${p.imagemUrl}" alt="${p.nome}" loading="lazy">`:`<div class="thumb-ph">🎮</div>`;
     const cat=CATS[p.categoria]||p.categoria||'';
     return `<div class="produto-card" onclick='abrirModal("${p.id}")'>
-      <div class="produto-thumb">${thumb}<div class="thumb-ov"></div><div class="thumb-play"><div class="play-btn">▶</div></div>${cat?`<div class="prod-cat">${cat}</div>`:''}</div>
-      <div class="produto-body">
-        <div class="prod-name">${p.nome||''}</div>
-        ${p.rtp?`<div class="prod-rtp">RTP <span>${p.rtp}%</span></div>`:''}
-        <div class="prod-badges">
-          ${p.jackpot?'<span class="badge jp">⭐ Jackpot</span>':''}
-          ${p.volatilidade?`<span class="badge">${p.volatilidade}</span>`:''}
-          ${p.plataformas?`<span class="badge">${p.plataformas}</span>`:''}
+      <div class="produto-thumb">
+        ${thumb}
+        <div class="thumb-ov"></div>
+        <div class="thumb-play"><div class="play-btn">▶</div></div>
+        ${cat?`<div class="prod-cat">${cat}</div>`:''}
+        ${p.jackpot?'<div class="prod-jp-badge">⭐ JP</div>':''}
+        <div class="produto-info-bottom">
+          <div class="prod-name">${p.nome||''}</div>
+          <div class="prod-meta">
+            ${p.rtp?`<span>RTP ${p.rtp}%</span>`:''}
+            ${p.volatilidade?`<span>· ${p.volatilidade}</span>`:''}
+          </div>
         </div>
       </div>
     </div>`;
@@ -351,24 +509,25 @@ async function carregarProdutos(){
     const snap=await db.collection('produtos').get();
     allProds=snap.docs.map(d=>({id:d.id,...d.data()}));
     renderProds(allProds);
-    animarNum('stat-jogos',allProds.length);
-  }catch(e){document.getElementById('produtos-grid').innerHTML='<div class="empty-state">Erro ao carregar produtos.</div>';}
-}
-
-function animarNum(id,alvo){
-  const el=document.getElementById(id);let n=0;const s=Math.max(1,Math.ceil(alvo/40));
-  const t=setInterval(()=>{n=Math.min(n+s,alvo);el.textContent=n;if(n>=alvo)clearInterval(t);},30);
+  }catch(e){
+    console.error(e);
+    document.getElementById('produtos-grid').innerHTML='<div class="empty-state">Erro ao carregar jogos. Tente recarregar a página.</div>';
+  }
 }
 
 function abrirModal(id){
   const p=allProds.find(x=>x.id===id);if(!p)return;
   document.getElementById('modal-cat').textContent=CATS[p.categoria]||p.categoria||'';
   document.getElementById('modal-title').textContent=p.nome||'';
-  document.getElementById('modal-desc').textContent=p.descricao||'Sem descrição disponível.';
+  document.getElementById('modal-desc').textContent=p.descricao||'Jogo da linha Top Game com tecnologia de jackpot inteligente. Entre em contato para conhecer todos os detalhes técnicos e comerciais.';
   const m=document.getElementById('modal-media');
-  if(p.videoUrl)m.innerHTML=`<video src="${p.videoUrl}" controls autoplay muted loop></video>`;
-  else if(p.imagemUrl)m.innerHTML=`<img src="${p.imagemUrl}" alt="${p.nome}">`;
-  else m.innerHTML=`<div class="modal-media-ph">🎮</div>`;
+  if(p.videoUrl){
+    m.innerHTML=`<video src="${p.videoUrl}" controls autoplay loop playsinline></video><div class="modal-media-grad"></div>`;
+  }else if(p.imagemUrl){
+    m.innerHTML=`<img src="${p.imagemUrl}" alt="${p.nome}"><div class="modal-media-grad"></div>`;
+  }else{
+    m.innerHTML=`<div class="modal-media-ph">🎮</div><div class="modal-media-grad"></div>`;
+  }
   const specs=[];
   if(p.rtp)specs.push({l:'RTP',v:`${p.rtp}%`});
   if(p.volatilidade)specs.push({l:'Volatilidade',v:p.volatilidade});
@@ -377,38 +536,55 @@ function abrirModal(id){
   if(p.jackpot)specs.push({l:'Jackpot',v:p.jackpotTipo||'Progressivo'});
   if(p.plataformas)specs.push({l:'Plataformas',v:p.plataformas});
   if(p.maxWin)specs.push({l:'Max Win',v:`${p.maxWin}x`});
-  document.getElementById('modal-specs').innerHTML=specs.map(s=>`<div class="spec-box"><div class="spec-label">${s.l}</div><div class="spec-value">${s.v}</div></div>`).join('');
+  const sp=document.getElementById('modal-specs');
+  sp.innerHTML=specs.length?specs.map(s=>`<div class="spec-box"><div class="spec-label">${s.l}</div><div class="spec-value">${s.v}</div></div>`).join(''):'<div style="color:var(--gray);font-size:0.85rem;">Especificações sob consulta.</div>';
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
 }
 function closeModalOv(e){if(e.target===document.getElementById('modal'))fecharModal();}
-function fecharModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';document.getElementById('modal-media').innerHTML='<div class="modal-media-ph">🎮</div>';}
+function fecharModal(){
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow='';
+  const m=document.getElementById('modal-media');
+  const v=m.querySelector('video');if(v){v.pause();v.src='';}
+  setTimeout(()=>{m.innerHTML='<div class="modal-media-ph">🎮</div><div class="modal-media-grad"></div>';},300);
+}
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')fecharModal();});
 
 async function carregarEmpresa(){
   try{
     const d=(await db.collection('empresa').doc('info').get()).data();
     if(!d)return;
-    if(d.nome)document.getElementById('emp-nome-pub').textContent=d.nome.toUpperCase();
-    if(d.descricao)document.getElementById('emp-desc-pub').textContent=d.descricao;
     if(d.email)document.getElementById('info-email').textContent=d.email;
     if(d.telefone)document.getElementById('info-tel').textContent=d.telefone;
     if(d.endereco)document.getElementById('info-end').textContent=d.endereco;
-    if(d.imagemUrl)document.getElementById('sobre-img').innerHTML=`<img src="${d.imagemUrl}" alt="Top Game">`;
+    if(d.imagemUrl)document.getElementById('pq-img').innerHTML=`<img src="${d.imagemUrl}" alt="Top Game">`;
   }catch(e){}
 }
 
 document.getElementById('form-contato').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const btn=e.target.querySelector('button[type=submit]');
+  const txtOriginal=btn.textContent;
   btn.textContent='Enviando...';btn.disabled=true;
   try{
-    await db.collection('contatos').add({nome:document.getElementById('f-nome').value,email:document.getElementById('f-email').value,empresa:document.getElementById('f-empresa').value,assunto:document.getElementById('f-assunto').value,mensagem:document.getElementById('f-msg').value,data:new Date()});
-    toast('Mensagem enviada com sucesso!','s');e.target.reset();
-  }catch(err){toast('Erro ao enviar. Tente novamente.','e');}
-  btn.textContent='Enviar Mensagem';btn.disabled=false;
+    await db.collection('contatos').add({
+      nome:document.getElementById('f-nome').value,
+      telefone:document.getElementById('f-tel').value,
+      email:document.getElementById('f-email').value,
+      empresa:document.getElementById('f-empresa').value,
+      assunto:document.getElementById('f-assunto').value,
+      mensagem:document.getElementById('f-msg').value,
+      data:new Date()
+    });
+    toast('Recebemos! Entraremos em contato em até 2h.','s');
+    e.target.reset();
+  }catch(err){toast('Erro ao enviar. Tente o WhatsApp.','e');}
+  btn.textContent=txtOriginal;btn.disabled=false;
 });
 
-carregarProdutos();carregarEmpresa();
+carregarProdutos();
+carregarEmpresa();
 </script>
 </body>
 </html>
