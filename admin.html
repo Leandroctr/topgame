@@ -564,11 +564,12 @@ async function carregarMensagens(){
     c.innerHTML=snap.docs.map(doc=>{
       const m=doc.data();
       const dt=m.data?new Date(m.data.seconds*1000).toLocaleString('pt-BR'):'';
-      const assuntos={parceria:'Parceria Comercial',integracao:'Integração de Jogos',suporte:'Suporte Técnico',outro:'Outro'};
+      const assuntos={'1-5':'1 a 5 máquinas','6-20':'6 a 20 máquinas','21-50':'21 a 50 máquinas','50+':'+50 máquinas',parceria:'Parceria Comercial',integracao:'Integração de Jogos',suporte:'Suporte Técnico',outro:'Outro'};
+      const telLink=m.telefone?` · 📱 <a href="https://wa.me/${(m.telefone||'').replace(/\D/g,'')}" target="_blank" style="color:var(--gold);text-decoration:none;">${m.telefone}</a>`:'';
       return `<div class="msg-card">
         <div class="msg-header"><span class="msg-nome">${m.nome||''}</span><span class="msg-data">${dt}</span></div>
-        <div class="msg-meta">📧 ${m.email||''}${m.empresa?' · 🏢 '+m.empresa:''}${m.assunto?' · '+assuntos[m.assunto]:''}</div>
-        <div class="msg-body">${m.mensagem||''}</div>
+        <div class="msg-meta">📧 ${m.email||''}${telLink}${m.empresa?' · 🏢 '+m.empresa:''}${m.assunto?' · '+(assuntos[m.assunto]||m.assunto):''}</div>
+        <div class="msg-body">${m.mensagem||'(sem mensagem)'}</div>
       </div>`;
     }).join('');
   }catch(e){c.innerHTML='<div style="color:var(--red);text-align:center;padding:3rem;">Erro ao carregar mensagens.</div>';}
